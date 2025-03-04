@@ -40,3 +40,4 @@ Terra Alta;Horta de St. Joan;515;15.7;22.3;10.3;40.3;-3.4
 Urgell;Tarrega;427;15.5;22.2;10.1;43.6;-5.9
 Valles Occidental;Sabadell - Parc Agrari;258;16.2;22.7;10.2;41.0;-5.1
 Valles Oriental;Granollers;210;16.6;22.7;11.8;41.4;-3.4
+ 
