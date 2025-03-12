@@ -19,6 +19,8 @@ float mitjana(float *dades, int dades_size){
     return m/dades_size;
 }
 
+// Ex 213 fet al principi per comprovar errors
+// imprimirtaula()
 void alu_print_alumnes(Alu *alumnes, int alumnes_size) {
     for(int i = 0; i < alumnes_size; i++){
         printf("%d | ", alumnes[i].niu);
@@ -49,11 +51,10 @@ void alu_swap(Alu *a, Alu *b) {
     *b = t;
 }
 
-void alu_ordenaralumnes(Alu *alumnes, Alu *alumnes_ordenats, int lrg) {    
-    // Copiar la taula original
+// ordenataula()
+void alu_ordenaralumnes(Alu *alumnes, Alu *alumnes_ordenats, int lrg) { // Ordena alumnes amb Bubble Sort
     for (int i = 0; i < lrg; i++) {alumnes_ordenats[i] = alumnes[i];}
 
-    // Algoritme d'ordenació de la bombolla
     for (int i = 0; i < lrg - 1; i++) {  
         int intercanvi = 0;
         for (int j = 0; j < lrg - i - 1; j++) {
@@ -62,7 +63,7 @@ void alu_ordenaralumnes(Alu *alumnes, Alu *alumnes_ordenats, int lrg) {
                 intercanvi = 1;
             }
         }
-        if (intercanvi == 0) break;  // Si no hi ha intercanvis, la taula ja està ordenada
+        if (intercanvi == 0) break; 
     }
 }
 

@@ -17,6 +17,8 @@ float mitjana(float *dades, int dades_size){
     return m/dades_size;
 }
 
+// Ex 213 fet al principi per comprovar errors
+// imprimirtaula()
 void alu_print_alumnes(Alu *alumnes, int alumnes_size) {
     for(int i = 0; i < alumnes_size; i++){
         printf("%d | ", alumnes[i].niu);
