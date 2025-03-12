@@ -12,6 +12,10 @@ int main(){
         printf("Les dades no han entrat be....\nTorneu-hi...\n");
     }
     if(fabs(a)<tol){
+        if (fabs(b)<tol){ // Exercici 1.1.1
+            fprintf(stderr, "S'ha generat una equacio sense incognita\n");
+            return 1;
+        }
         printf("L'equacio no es de segon grau si poseu a=0 .\n");
         printf("La solucio de\n (%g) * x + (%g) =0\nes:\n",b,c);
         printf("x= %g\n",-c/b);

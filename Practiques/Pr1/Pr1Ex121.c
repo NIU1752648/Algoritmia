@@ -1,3 +1,6 @@
+//  Sergi Palau Travé       NIU1750517
+//  Nicolás Merayo Martos   NIU1752648 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,10 +12,49 @@ typedef struct{
     float tmtj,tmxm,tmnm,tmx,tmn;
 }MetCom;
 
+void print_comarca(MetCom *comarca) {
+    printf("%-20s ", comarca->nom);
+    printf("%-35s ", comarca->estacio);
+    printf("%-.1f ", comarca->tmx);
+    printf("%-.1f", comarca->tmn);
+    printf("\n");
+}
+
+void ex121(int numcom, MetCom *comarca, MetCom *comarca_max, MetCom *comarca_min, float *return_max, float *return_min) {
+    // Exercici 1.2.1
+
+    float mitjana_max = 0;
+    float mitjana_min = 0;
+    
+    int index_min, index_max = 0;
+
+    float max = comarca[0].tmx;
+    float min = comarca[0].tmx;
+    for (int i = 0; i < numcom; i++){
+        mitjana_max = mitjana_max + comarca[i].tmx;
+        mitjana_min = mitjana_min + comarca[i].tmn;
+        if (comarca[i].tmx > max) {
+            max = comarca[i].tmx;
+            index_max = i;
+        } 
+        if (comarca[i].tmx < min) {
+            min = comarca[i].tmn;
+            index_min = i;
+        } 
+    }
+    *return_max = mitjana_max/numcom;
+    *return_min = mitjana_min/numcom;
+
+    *comarca_max = comarca[index_max];
+    *comarca_min = comarca[index_min];
+
+}
+
 int main(){
     FILE *meteo;
     MetCom *comarca;
     unsigned i=0,numcom=0,ll;
+
     
     if ((meteo=fopen("MeteoCat2023.txt","r"))==NULL){
         printf("No es pot obrir el fitxer\n");
@@ -23,7 +65,7 @@ int main(){
         if (ll=='\n'){numcom++;}
     }
     printf("\nDades de %d comarques\n",numcom);
-    
+
     rewind(meteo);
     
     if((comarca = (MetCom *) malloc(numcom * sizeof(MetCom))) == NULL){
@@ -40,7 +82,10 @@ int main(){
         fscanf(meteo, "%f;", &(comarca[i].tmnm));
         fscanf(meteo, "%f;", &(comarca[i].tmx));
         fscanf(meteo, "%f\n", &(comarca[i].tmn));
+ 
     }
+    
+
     printf("Fi de la lectura.....\n\n");
     
     fclose(meteo);
@@ -54,6 +99,19 @@ int main(){
         printf("%-.1f",comarca[i].tmx);
         printf("\n");
     }
- 
+
+    MetCom comarca_max, comarca_min;
+    float mitjana_max, mitjana_min; 
+    ex121(numcom, comarca, &comarca_max, &comarca_min, &mitjana_max, &mitjana_min);
+
+    printf("\nLa mitjana de temperatures maximes es %f\n", mitjana_max);
+    printf("La mitjana de temperatures minimes es %f\n", mitjana_min);
+
+    printf("\nComarca amb la temperatura maxima: \n");
+    print_comarca(&comarca_max);
+    printf("Comarca amb la temperatura minima: \n");
+
+    print_comarca(&comarca_min);
+
     return 0;
 }
